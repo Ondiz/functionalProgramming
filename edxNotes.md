@@ -59,3 +59,45 @@ f a + b --f(a) + b from math
 * Indentation like Python, implicit grouping
 * Useful commands --> `:load` *script*, `:reload`, `:edit` *script*, `:type`
   *expression*,`:?` 
+
+## Types and classes
+
+* **Type**: name for a collection of related values. Example `Bool`
+* Applying a function to a wrong type makes a *type error*
+* `e :: t` --> `e` has type `t`
+* *Type inference*: compiler calculates type of expression
+* `:type <exp>` to calculate type of expression
+
+<!-- table of types
+--->
+
+* **List**: sequence of values with same type. Examples:
+
+```haskell
+[False, True, False]::[Bool] -- list of elements type Bool
+['a', 'b']:: [Char] -- list of elements type char
+```
+
+* **Tuple**: sequence of values of different type. Example:
+
+```haskell
+(False, 'a') :: (Bool, Char) -- length appears in time
+```
+
+* **Function**: mapping from values of a type to values of another
+type. Examples:
+
+```haskell
+not :: Bool -> Bool
+isDigit :: Char -> Bool
+
+function :: t1 -> t2 -- from domain to range in general
+
+```
+
+* *Curried function*: functions that return arguments one at a time:
+  `a -> (a -> a)` equivalent to `a -> a -> a`, arrow associates to the
+  right. Any function that returns more than one values can be
+  curried. Useful for *partially applying functions*. **Most**
+  functions applied in curried form.
+
