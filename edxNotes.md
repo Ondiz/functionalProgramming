@@ -23,16 +23,16 @@ sum[1..10]
 Examples:
 
 ```haskell
-> head[1,2,3,4] --first element
+> head[1,2,3,4] --take first element
 1
-> tail[1,2,3,4] --last element
-4
+> tail[1,2,3,4] --remove first element
+[2,3,4]
 > [1,2,3,4] !! 2 --element #2
 3
 > take 3 [1,2,3,4] -- generalization of head
 [1,2,3]
-> drop 3 [1,2,3,4] --generalization of tail
-[2,3,4]
+> drop 3 [1,2,3,4,5] --generalization of tail
+[4,5]
 > [1,2,3]++[4,5] --append
 [1,2,3,4,5]
 ```
@@ -48,8 +48,9 @@ f a b + c*d --f(a,b) + c d from math
 f a + b --f(a) + b from math 
 ```
 * Haskell file (script) --> `.hs`
-* Define function in script, then open hugs with script as argument so
-  that functions are available. If script is changed use `:reload`
+* Define function in script, then open Hugs with script as argument so
+  that functions are available. If script is changed use
+  `:reload`. Also possible to load using `:load` *script*
 * *Infix operator*: `x `f` y --> f x y`  
 * *Naming*:
   * function and parameter name must begin with lowercase
@@ -59,6 +60,15 @@ f a + b --f(a) + b from math
 * Indentation like Python, implicit grouping
 * Useful commands --> `:load` *script*, `:reload`, `:edit` *script*, `:type`
   *expression*,`:?` 
+* Comments: one line `--comment`, nested:
+
+```haskell
+{-
+very long
+comment goes
+here
+-}
+```
 
 ## Types and classes
 
