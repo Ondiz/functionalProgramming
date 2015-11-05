@@ -91,7 +91,7 @@ here
 * **Tuple**: sequence of values of different type. Example:
 
 ```haskell
-(False, 'a') :: (Bool, Char) -- length appears in time
+(False, 'a') :: (Bool, Char) -- length appears in type
 ```
 
 * **Function**: mapping from values of a type to values of another
