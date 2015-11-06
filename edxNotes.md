@@ -75,20 +75,33 @@ here
 * **Type**: name for a collection of related values. Example `Bool`
 * Applying a function to a wrong type makes a *type error*
 * `e :: t` --> `e` has type `t`
-* *Type inference*: compiler calculates type of expression
+* *Type inference*: compiler calculates type of expression prior to
+  execution. Haskell programs are *type safe*, type error never
+  happens in run time
 * `:type <exp>` to calculate type of expression
 
-<!-- table of types
---->
+| Type        | Explanation   | 
+|:----------: |:-------------:|
+| `Bool` | Logical value: `True` or `False`|
+| `Char` | Single character, enclosed in sigle quotes: `'a'` |
+| `String` | String of characters, double quotes: `"abc"`|
+| `Int` | Fixed precision integer |
+| `Integer` | Arbitrary precision integer, doesn't overflow |
+| `Float` | Single precision floating point number |
 
-* **List**: sequence of values with same type. Examples:
+Table: Different types in Haskell
+
+
+* **List**: sequence of values with same type. Can be infinite. Examples:
 
 ```haskell
 [False, True, False]::[Bool] -- list of elements type Bool
 ['a', 'b']:: [Char] -- list of elements type char
 ```
 
-* **Tuple**: sequence of values of different type. Example:
+* **Tuple**: sequence of values of different type. Number of elements
+  is called *arity*. Finite number of elements because type of all
+  have to be calculated.  Example:
 
 ```haskell
 (False, 'a') :: (Bool, Char) -- length appears in type
@@ -105,9 +118,10 @@ function :: t1 -> t2 -- from domain to range in general
 
 ```
 
-* *Curried function*: functions that return arguments one at a time:
+* *Curried function*: functions that return arguments one at a time
+  (functions can return functions):
   `a -> (a -> a)` equivalent to `a -> a -> a`, arrow associates to the
   right. Any function that returns more than one values can be
   curried. Useful for *partially applying functions*. **Most**
-  functions applied in curried form.
+  functions applied in curried form, if tuples are not explicitly declared.
 
