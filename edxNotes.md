@@ -125,3 +125,20 @@ function :: t1 -> t2 -- from domain to range in general
   curried. Useful for *partially applying functions*. **Most**
   functions applied in curried form, if tuples are not explicitly declared.
 
+* *Polymorphic function*: functions not defined for a particular
+type. Example:
+
+```haskell
+length :: [a] -> Int 
+```
+
+* Price for polymorphism: type variables start with lowercase and types
+with uppercase
+
+* *Overloaded function*: functions with same name but different
+  types. In Haskell overloading means that there is a restriction in
+  the type class. Example:
+
+```haskell
+sum :: Num [a] => [a] -> Int -- only numeric values allowed
+```
