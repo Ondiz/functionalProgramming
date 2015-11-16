@@ -201,5 +201,46 @@ head (x : ) = x
 [^list]: Lists are constructed one element at a time from the empty
   list using *cons operator* `[1,2,3] = 1:(2:(3:[]))= 1:2:3:[]` 
 
+### Lambda expressions
 
+Functions can be constructed without naming using *lambda
+expressions*:
+
+```haskell
+\x -> x + x --\x = \lambda x (from lambda calculus) 
+```
+
+* Useful for currying:
+
+```haskell
+add x y = x + y
+add = \x -> (\y -> x+y)
+```
+
+* For returning functions as results
+
+* For avoiding naming functions only used once:
+
+```haskell
+odds n = map f [0..n-1]
+         where
+		  f x = x*2 +1
+
+odds n = map (\x -> x*2 + 1)[0..n-1] --pass lambda as parameter to map
+``` 
+
+### Sections
+
+Operator written between two arguments can be used in curried way
+using parenthesis:
+
+```haskell
+--Examples:
+(1+) --sucessor
+(1/) --reciprocate
+(*2) --double
+(/2) --half
+```
+
+For avoiding naming. 
 

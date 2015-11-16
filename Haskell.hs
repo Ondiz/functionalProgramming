@@ -6,3 +6,12 @@ pair x y = (x,y)
 palindrome xs = reverse xs == xs
 twice f x = f (f x)
 f xs = take 3 (reverse xs)
+
+--Defining functions 
+
+funct x xs = take (x+1) xs ++ drop x xs
+remove n xs = take n xs ++ drop (n+1) xs
+
+halve xs = (take n xs, drop n xs)
+  where n = length xs `div`2
+
