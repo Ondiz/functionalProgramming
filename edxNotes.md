@@ -142,3 +142,64 @@ with uppercase
 ```haskell
 sum :: Num [a] => [a] -> Int -- only numeric values allowed
 ```
+
+## Defining functions
+
+### Conditional expressions
+
+Example:
+
+```haskell
+abs :: Int -> Int
+abs n = if n >=0 then n else -n
+```
+
+* Can be nested
+* Conditional expressions **must** have an `else` branch
+
+### Guarded equation:
+
+* Sequence of logical expressions
+* Alternative to conditional (Haskell people
+  prefer this)
+
+```haskell
+abs n | n >= 0    = n -- |= such that
+      | otherwise = -n
+```
+
+* Can be used to make definitions involving multiple conditions
+
+### Pattern matching
+
+```haskell
+(&&) :: Bool -> Bool -> Bool
+True && True = True
+_    && _    = False --anything but True&&True 
+```
+
+More efficient way using wildcard + lazy evaluation:
+
+```haskell
+(&&) :: Bool -> Bool -> Bool
+True  && b = b -- True && something --> something
+False && _ = False -- always False
+```
+* Order is important
+* Patterns may not repeat variables: all the variables inside the
+  pattern have to be different
+
+* *Lists in pattern matching*: use *cons* definition (`:`)[^list]. Only
+  matches not empty list. These pattern must be parethesized because
+  function application has higher priority.
+
+```haskell
+head :: [a ] → a
+head (x : ) = x
+```
+
+[^list]: Lists are constructed one element at a time from the empty
+  list using *cons operator* `[1,2,3] = 1:(2:(3:[]))= 1:2:3:[]` 
+
+
+
