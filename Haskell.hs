@@ -15,3 +15,9 @@ remove n xs = take n xs ++ drop (n+1) xs
 halve xs = (take n xs, drop n xs)
   where n = length xs `div`2
 
+e3 x = x*2
+e4 (x,y) = x
+e6 x y = x*y
+e8 x y = (y,x)
+e9 [x,y]=(x,True)
+e10 (x,y)=[x,y]
