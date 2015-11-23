@@ -244,3 +244,49 @@ using parenthesis:
 
 For avoiding naming. 
 
+## List comprehensions
+
+* Code that manipulates collections
+* Favorite collection for mathematicians: **sets**. Problems with
+  sets:
+  * No duplication
+  * Deal with equality
+* Haskell has tricks to deal with sets as lists
+
+* Set comprehensions in Math: `{x^2 | x ∈ {1,...,5}}`
+* List comprehension in Haskell: `[x^2 | x <- [1..5]]`
+* `x <- [1..5]` is called *generator*
+* Comprehensions can have multiple generators (similar to nested loop,
+  x is the outer loop and y is the inner):
+
+```haskell
+> [(x,y) | x <- [1,2,3], y <- [4,5]]
+> [(1,4),(1,5),(2,4),(2,5),(3,4),(3,5)]
+> [(x,y) | y <- [4,5],  x <- [1,2,3]]
+> [(1,4),(2,4),(3,4),(1,5),(2,5),(3,5)]
+```
+
+* Generators can depend on each other, as in loops: 
+
+```haskell
+> [(x,y) | x <- [1,2,3], y <- [x..3]]
+> [(1,1),(1,2),(1,3),(2,2),(2,3),(3,3)]
+```
+
+* Very concise code
+* Filters (*guards*): `[x | x <- [1..10], even x]`
+
+### The zip function
+
+* Combines two list to a list of pairs
+* Useful when programming with list comprehensions.
+
+```haskell
+zip :: [a] -> [b]-> [(a,b)]
+```
+
+### String comprehension
+
+* Strings = character list `[Char]`
+* Everything that can be done in lists will work with strings
+
