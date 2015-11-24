@@ -290,3 +290,38 @@ zip :: [a] -> [b]-> [(a,b)]
 * Strings = character list `[Char]`
 * Everything that can be done in lists will work with strings
 
+## Recursive functions
+
+* *Tail call elimination*
+
+```haskell
+factorial 1 = 0
+factorial n = n * factorial (n-1)
+```
+
+* Some functions are simpler to define using recursions
+* *Induction* can be used to prove porperties of recursive functions
+* Recursion can be used also in lists:
+
+```haskell
+product :: [Int] -> Int
+product [] = 1
+product (n:ns) = n * product ns
+```
+
+Note: `:` appends at the beginning, `++` appends at the end
+
+* *Quicksort*: algorithm for sorting integers. Two rules:
+  * The empty list is already sorted
+  * Bolzano in the rest
+
+```haskell
+qsort :: [Int] -> Int
+qsort [] = []
+qsort (x:xs)=
+  qsort smaller ++ [x] ++ qsort larger
+  where
+    smaller = [a | a <- xs, a <= x]
+	larger  = [b | b <- xs, b > x]
+```
+
