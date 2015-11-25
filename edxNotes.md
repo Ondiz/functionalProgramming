@@ -253,7 +253,7 @@ For avoiding naming.
   * Deal with equality
 * Haskell has tricks to deal with sets as lists
 
-* Set comprehensions in Math: `{x^2 | x ∈ {1,...,5}}`
+* Set comprehensions in Math: $\lbrace x^2 | x \in \lbrace 1,...,5\rbrace\rbrace$
 * List comprehension in Haskell: `[x^2 | x <- [1..5]]`
 * `x <- [1..5]` is called *generator*
 * Comprehensions can have multiple generators (similar to nested loop,
