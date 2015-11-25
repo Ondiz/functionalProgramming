@@ -309,7 +309,7 @@ product [] = 1
 product (n:ns) = n * product ns
 ```
 
-Note: `:` appends at the beginning, `++` appends at the end
+Note: `:` appends element to list, `++` concatenates lists
 
 * *Quicksort*: algorithm for sorting integers. Two rules:
   * The empty list is already sorted
