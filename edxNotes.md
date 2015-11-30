@@ -325,3 +325,108 @@ qsort (x:xs)=
 	larger  = [b | b <- xs, b > x]
 ```
 
+## Higher-order functions
+
+Higher-order functions are functions that take functions as arguments
+or return functions as results.
+
+Useful for:
+
+* *Programming idioms*, avoid repetition 
+* *Domain specific languages*
+* *Algebraic properties* to reason about programs
+
+### Map
+
+Applies function to every element in list
+
+```haskell
+map :: (a -> b) -> [a] -> [b]
+```
+
+Map can be defined using list comprehension:
+
+```haskell
+map f xs = [f x | x <- xs]
+```
+
+Or recursively (for abstraction):
+
+```haskell
+map f [] = []
+map f (x:xs) = f x : map f xs
+```
+
+### Filter
+
+Removes elements that don't satisfy a predicate
+
+```haskell
+filter :: (a -> Bool) -> [a] -> [a]
+```
+
+Definition using list comprehension:
+
+```haskell
+filter p xs = [x | x <- xs, p x]
+```
+
+Or recursively:
+
+```haskell
+filter p [] = []
+filter p (x:xs)
+  | p x       = x:filter p xs --cons 
+  | otherwise = filter p xs --forget about xs
+```
+
+### Foldr & foldl
+
+Homomorfism over list -> generalization of sum, product...
+
+* r: from the right
+* l: from the left
+
+```haskell
+f []    = v
+f (x:xs)= x (+operator) f xs
+```
+
+Examples:
+
+```haskell
+sum = foldr (+) 0
+product = foldr (*) 1
+and = folder (&&) True
+```
+Replaces the empty list by `v` and cons by `f`
+
+Useful for:
+
+* For defining recursive functions
+* Properties of functions defined usig foldr can be proved using
+  algebracic properties
+* Program optimization
+
+### Other library functions
+
+**Composition**: combines two functions into one
+
+```haskell
+(.) :: (b -> c)-> (a -> b) -> (a -> c)
+f . g = \x -> f(g x) --first apply g, apply f to result
+```
+
+Example:
+
+```haskell
+odd :: Int -> Bool
+odd = not . even
+```
+
+Use it sparingly because it's difficult to read
+
+**all**: decides if every element in a list satisfies condition
+**any**: decides if every any in a list satisfies condition
+**takeWhile**: takes elements while condition is true
+**dropWhile**: drop elements while condition is true
