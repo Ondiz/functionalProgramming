@@ -430,3 +430,82 @@ Use it sparingly because it's difficult to read
 **any**: decides if every any in a list satisfies condition
 **takeWhile**: takes elements while condition is true
 **dropWhile**: drop elements while condition is true
+
+## Functional parsers and monads
+
+**Parser**: program hat analyses piece of test and determines its
+  syntantic structure
+
+```haskell
+type Parser = String -> Tree
+
+--If there is unused output
+type Parser = String -> (Tree, String)
+
+--If there are more than one option of parsing
+type Parser = String -> [(Tree, String)]
+
+--Parsers can produce any type
+type Parser = String -> [(a, String)]
+```
+
+### Basic parsers
+
+Example
+
+```haskell
+--Single character
+item :: Parser Char
+<ex>
+```
+
+The function `parse` applies parser to input 
+
+### Sequencing
+
+A sequence of parsers can be combined using `do`:
+
+```haskell
+p :: Parser (Char, Char)
+p = do x <- item
+	   item
+	   y <- item
+	   return (x,y)
+```
+
+* Layout rule!
+* If one parser fails, all fail
+
+### Derived primitives
+
+<!---
+more
+-->
+
+## Interactive programs
+
+Interaction with keyboard and screen
+
+**Problem**: Haskell programs have no side effects. Same arguments
+  give same results. `Readline`, for example, does not give the same
+  result all the time!
+
+**Solution**: new type `IO a`, actions that have side
+  effects. Function that return `void`: `IO ()` (empty tuple)
+
+### Basic actions
+
+Actions in the standard library. Examples:
+
+```haskell
+getChar :: IO Char --reads character from standard input
+putChar :: IO Char --writes character to standard output
+```
+
+### Sequencing
+
+Works like parsing
+
+### Derived primitives
+
+We can read a string from standard input basing on `getChar`
