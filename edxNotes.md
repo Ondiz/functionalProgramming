@@ -451,15 +451,34 @@ type Parser = String -> [(a, String)]
 
 ### Basic parsers
 
-Example
+Examples
 
 ```haskell
---Single character
+--Parsers single character
+
 item :: Parser Char
-<ex>
+item = \inp -> case inp of
+                    [] -> []
+				    (x:xs) -> [(x,xs)]
+--case for pattern matching in the body of definition
+
+--Always succeeds
+
+return :: a -> Parser a
+return v = \inp -> [(v,inp)]
+
+--Always fails
+
+failure :: Parser a
+failure = \inp -> []
 ```
 
-The function `parse` applies parser to input 
+The function `parse` applies parser to input:
+
+```haskell
+parse :: Parser a -> String -> [(a,String)]
+parse p inp = p inp 
+```
 
 ### Sequencing
 
@@ -473,14 +492,24 @@ p = do x <- item
 	   return (x,y)
 ```
 
+* Parser can be combined using  `+++`(*else*) , if the first one fails, apply
+  the second and so on
 * Layout rule!
 * If one parser fails, all fail
 
 ### Derived primitives
 
-<!---
-more
--->
+Using the three basic parsers we can define parser that returns single
+characters that return characters that satisfy a given predicate:
+
+```haskell
+sat :: (Char -> Bool) -> Parser Char
+sat p = do x <- item
+           if p x then return x else failure
+```
+
+Using `sat` and different predicates we can define parsers for digits,
+lower-case letters...
 
 ## Interactive programs
 
@@ -508,4 +537,5 @@ Works like parsing
 
 ### Derived primitives
 
-We can read a string from standard input basing on `getChar`
+We can read a string from standard input basing on `getChar`, for
+instance. 
