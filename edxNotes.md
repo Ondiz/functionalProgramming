@@ -539,3 +539,5 @@ Works like parsing
 
 We can read a string from standard input basing on `getChar`, for
 instance. 
+
+## Declaring types and classes
