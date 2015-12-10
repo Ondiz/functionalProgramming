@@ -541,3 +541,33 @@ We can read a string from standard input basing on `getChar`, for
 instance. 
 
 ## Declaring types and classes
+
+* We can define new types in Haskell
+* Things in common with objects in Object Oriented Programming
+
+### Type declarations
+
+Example:
+
+```haskell
+type String = [Char]
+```
+
+* Type definition can be used for better readability
+* Type declarations can be nested, but they can't be
+  recursive[^recursive].
+
+[^recursive]: Recursive declaration is only valid in nominal types
+
+### Data declarations
+
+Example: 
+
+```haskell
+data Bool = False | True
+```
+
+These can be declared recursively, because are data and types at the
+same time. `False` and `True` are called **constructors** in this
+case. Types and constructors names must begin with uppercase. 
+
