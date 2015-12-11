@@ -53,10 +53,10 @@ f a + b --f(a) + b from math
   `:reload`. Also possible to load using `:load` *script*
 * *Infix operator*: `x `f` y --> f x y`  
 * *Naming*:
-  * function and parameter name must begin with lowercase
-  * can use quotes (*prime*)
-  * type has to start with uppercase
-  * convention --> `s` at the end means list, `ss` list of lists
+    * function and parameter name must begin with lowercase
+    * can use quotes (*prime*)
+    * type has to start with uppercase
+    * convention --> `s` at the end means list, `ss` list of lists
 * Indentation like Python, implicit grouping
 * Useful commands --> `:load` *script*, `:reload`, `:edit` *script*, `:type`
   *expression*,`:?` 
@@ -249,8 +249,8 @@ For avoiding naming.
 * Code that manipulates collections
 * Favorite collection for mathematicians: **sets**. Problems with
   sets:
-  * No duplication
-  * Deal with equality
+    * No duplication
+    * Deal with equality
 * Haskell has tricks to deal with sets as lists
 
 * Set comprehensions in Math: $\lbrace x^2 | x \in \lbrace 1,...,5\rbrace\rbrace$
@@ -312,8 +312,8 @@ product (n:ns) = n * product ns
 Note: `:` appends element to list, `++` concatenates lists
 
 * *Quicksort*: algorithm for sorting integers. Two rules:
-  * The empty list is already sorted
-  * Bolzano in the rest
+    * The empty list is already sorted
+    * Bolzano in the rest
 
 ```haskell
 qsort :: [Int] -> Int
@@ -547,7 +547,7 @@ instance.
 
 ### Type declarations
 
-Example:
+Using `type` synonym between types can be defined. Example:
 
 ```haskell
 type String = [Char]
@@ -557,17 +557,66 @@ type String = [Char]
 * Type declarations can be nested, but they can't be
   recursive[^recursive].
 
-[^recursive]: Recursive declaration is only valid in nominal types
+[^recursive]: Recursive declaration is only valid in nominal types (see [Data declaration](#data))
 
-### Data declarations
+### Data declarations {#data}
 
-Example: 
+Using `data` completely new types can be defined giving their values. Example: 
+
+```haskell
+data Bool = False | True --Boolean types can be True or False
+```
+
+* These can be declared recursively, because are data and types at the
+same time.
+* The new values of the type are called **constructors** in this
+case.
+* Types and constructors names must begin with capital letter.
+* The same constructor name cannot be used in more than one type.
+* Values of new types can be used as built-in types
+* The construtors can also have arguments
+* Data declarations can be parameterised
+
+### Recursive types
+
+New types can be declared in terms of themselves, if declared using `data`:
+```haskell
+data Nat = Zero | Succ Nat --Creates an infinite sequence of values
+```
+
+### Class and instance declaration
+
+Classes are declared using `class`. Example:
+
+```haskell
+class  Eq a  where
+   (==), (/=) :: a -> a -> Bool
+
+       -- Minimal complete definition:
+       --      (==) or (/=)
+   x /= y     =  not (x == y)
+   x == y     =  not (x /= y)
+```
+
+For a type `a` to be an instance of a given class it has to comply
+       --      with the conditions in the class definition. For
+	   instancing:
+
+```haskell
+instance Eq Bool where
+  False == False = True
+  True == True   = True
+  _ ==_          = False
+```
+
+* Only types declared using `data` can become classes.
+* Classes can also be extended to make new classes (inheritance) using
+  `=>`
+
+* For making a type instance of a built-in type use
+  `deriving`. Example:
 
 ```haskell
 data Bool = False | True
-```
-
-These can be declared recursively, because are data and types at the
-same time. `False` and `True` are called **constructors** in this
-case. Types and constructors names must begin with uppercase. 
-
+            deriving(Eq, Ord, Show, Read)
+``` 
