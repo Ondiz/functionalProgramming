@@ -620,3 +620,60 @@ instance Eq Bool where
 data Bool = False | True
             deriving(Eq, Ord, Show, Read)
 ``` 
+
+## Lazy evaluation
+
+Everything uses lazy evaluation except you make things
+strict. Features of Haskell evaluation:
+
+1. Avoid *unnecessary evaluation*
+2. Allow programs to be *more modular*
+3. Allows *infinite lists*
+
+Expressions are evaluated by applying definitions until no further
+simplification is possible:
+
+```
+square n = n*n
+square (3 + 4) --> square 7 --> 7*7 --> 49
+```
+
+If there are two different ways to evaluate an expression, the two of
+them will give the same result (*pure language*, no side
+effects). Makes it easier to refactor Haskell code.  
+
+### Termination
+
+* **Innermost reduction**: evaluates from the expression that has no
+  expression inside
+
+* **Outermost reduction**: evaluates from the expression that is not
+  contained in any expression
+
+    * May give a result when innermost fails to terminate
+	* If there exists any reduction that terminates, outermost terminates
+    * May require more steps because of duplication, this problem can
+      be solved using **pointers** for **sharing**
+
+Lazy evaluation
+: outermost reduction with sharing
+
+### Infinite lists
+
+Lazy evaluation allows infinite lists, while innermost evaluation does
+not terminate in this case.
+
+### Lazy evaluation
+
+> Using lazy evaluation, expressions are only evaluated as much as
+> required to produce the final result.
+
+So, an infinite list is only a *potentially infinite list* because it
+is only evaluated as needed.
+
+### Modular programming
+
+We can generate finite list for taking elements from an infinite list,
+this allows *data control*
+
+
